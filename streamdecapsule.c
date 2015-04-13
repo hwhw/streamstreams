@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
     name_size = ntohs(header.name_size);
     if(name_size > 0) {
-        name = malloc(name_size);
+        name = malloc(name_size + 1);
         if(name == NULL) {
             perror("allocating memory for stream name");
             goto error;
@@ -48,6 +48,7 @@ int main(int argc, char* argv[]) {
             fprintf(stderr, "error reading stream name.\n");
             goto error;
         }
+        name[name_size] = '\0';
     } else {
         name = NULL;
     }
